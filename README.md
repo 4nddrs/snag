@@ -185,19 +185,19 @@ snag/
 | Elemento            | Color                                                           | Hex       |
 | ------------------- | --------------------------------------------------------------- | --------- |
 | Primary (Navy Blue) | ![#1E3A8A](https://via.placeholder.com/15/1E3A8A/000000?text=+) | `#1E3A8A` |
-| Secondary (Azul)    | ![#3B82F6](https://via.placeholder.com/15/3B82F6/000000?text=+) | `#3B82F6` |
-| Success (Verde)     | ![#10B981](https://via.placeholder.com/15/10B981/000000?text=+) | `#10B981` |
-| Error (Rojo)        | ![#EF4444](https://via.placeholder.com/15/EF4444/000000?text=+) | `#EF4444` |
-| Warning (Amarillo)  | ![#F59E0B](https://via.placeholder.com/15/F59E0B/000000?text=+) | `#F59E0B` |
+| Secondary (Blue)    | ![#3B82F6](https://via.placeholder.com/15/3B82F6/000000?text=+) | `#3B82F6` |
+| Success (Green)     | ![#10B981](https://via.placeholder.com/15/10B981/000000?text=+) | `#10B981` |
+| Error (Red)        | ![#EF4444](https://via.placeholder.com/15/EF4444/000000?text=+) | `#EF4444` |
+| Warning (Yellow)  | ![#F59E0B](https://via.placeholder.com/15/F59E0B/000000?text=+) | `#F59E0B` |
 | Info (Cyan)         | ![#06B6D4](https://via.placeholder.com/15/06B6D4/000000?text=+) | `#06B6D4` |
 
 ### Métodos HTTP
 
 - `GET` - Cyan (`#06B6D4`)
-- `POST` - Verde (`#10B981`)
-- `PUT` - Amarillo (`#F59E0B`)
-- `DELETE` - Rojo (`#EF4444`)
-- `PATCH` - Azul (`#3B82F6`)
+- `POST` - Green (`#10B981`)
+- `PUT` - Yellow (`#F59E0B`)
+- `DELETE` - Red (`#EF4444`)
+- `PATCH` - Blue (`#3B82F6`)
 
 ## 🔮 Roadmap
 
