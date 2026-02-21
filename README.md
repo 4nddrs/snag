@@ -4,7 +4,7 @@
 
 **S**wagger **N**avigator **A**nd **G**enerator
 
-*Cliente TUI moderno para explorar y probar APIs REST documentadas con OpenAPI 3.x / Swagger*
+*Modern TUI client to explore and test REST APIs documented with OpenAPI 3.x / Swagger*
 
 <br>
 
@@ -29,71 +29,71 @@
 
 ---
 
-## 🌟 ¿Qué es SNAG?
+## 🌟 What is SNAG?
 
-SNAG es un cliente de API interactivo que se ejecuta en tu terminal. Piensa en él como Postman, pero más rápido, minimalista y con atajos de teclado estilo Vim. Consume automáticamente la especificación OpenAPI de cualquier API y te permite navegar, editar parámetros y ejecutar requests sin salir de tu terminal.
+SNAG is an interactive API client that runs in your terminal. Think of it as Postman, but faster, minimalist, and with Vim-style keyboard shortcuts. It automatically consumes the OpenAPI specification of any API and allows you to navigate, edit parameters, and execute requests without leaving your terminal.
 
-### Características Principales
+### Key Features
 
-- **🎯 Consumo automático de OpenAPI 3.x**: Solo proporciona la URL y SNAG descubre todos los endpoints
-- **⌨️ Navegación Vim-style**: `j/k` para moverse, `enter` para seleccionar, `esc` para volver
-- **🎨 Interfaz elegante tipo LazyVim**: Dark mode profesional con sintaxis highlighting
-- **📋 3 Paneles interactivos en tiempo real**:
-  - **Navegación**: Lista de endpoints con scroll fluido, agrupados por tags con colores por método HTTP
-  - **Editor**: Sistema de campos de entrada para parámetros y request body (sin edición manual de JSON!)
-  - **Respuesta**: Resultado con syntax highlighting, status code y tiempo de respuesta
-- **🔍 Búsqueda/filtrado en tiempo real**: Tecla `/` para buscar endpoints por método, path o descripción
-- **📊 Grupos colapsables**: Organiza endpoints por tags (Users, Products, Orders, etc.)
-- **⚡ Rápido y ligero**: Sin dependencias pesadas, escrito en Go con Bubble Tea
-- **📋 Copiar respuestas**: Tecla `y` para copiar el JSON al portapapeles
-- **🌐 Compatible con cualquier framework**: FastAPI, Express, Spring Boot, Django, Laravel, ASP.NET Core, etc.
+- **🎯 Automatic OpenAPI 3.x consumption**: Just provide the URL and SNAG discovers all endpoints
+- **⌨️ Vim-style navigation**: `j/k` to move, `enter` to select, `esc` to go back
+- **🎨 Elegant LazyVim-style interface**: Professional dark mode with syntax highlighting
+- **📋 3 interactive real-time panels**:
+  - **Navigation**: Endpoint list with smooth scrolling, grouped by tags with colors by HTTP method
+  - **Editor**: Input field system for parameters and request body (no manual JSON editing!)
+  - **Response**: Result with syntax highlighting, status code, and response time
+- **🔍 Real-time search/filtering**: `/` key to search endpoints by method, path, or description
+- **📊 Collapsible groups**: Organize endpoints by tags (Users, Products, Orders, etc.)
+- **⚡ Fast and lightweight**: No heavy dependencies, written in Go with Bubble Tea
+- **📋 Copy responses**: `y` key to copy JSON to clipboard
+- **🌐 Compatible with any framework**: FastAPI, Express, Spring Boot, Django, Laravel, ASP.NET Core, etc.
 
-## 🚀 Instalación
+## 🚀 Installation
 
-### Opción 1: Compilar desde código fuente
+### Option 1: Build from source
 
 ```bash
-# Clonar el repositorio
+# Clone the repository
 git clone <repo-url>
 cd snag
 
-# Instalar dependencias
+# Install dependencies
 go mod tidy
 
-# Compilar
+# Build
 go build -o snag
 
 # (Windows)
 go build -o snag.exe
 ```
 
-### Opción 2: Instalar binario (próximamente)
+### Option 2: Install binary (coming soon)
 
 ```bash
-# Linux/macOS con Homebrew
+# Linux/macOS with Homebrew
 brew install snag
 
 # Go install
-go install github.com/tu-usuario/snag@latest
+go install github.com/your-user/snag@latest
 ```
 
-## 📖 Uso Básico
+## 📖 Basic Usage
 
 ```bash
-# Con cualquier API que exponga OpenAPI 3.x
+# With any API that exposes OpenAPI 3.x
 snag http://localhost:8000
 
-# Con la ruta completa al openapi.json
+# With the full path to openapi.json
 snag http://localhost:8000/openapi.json
 
-# Con API remota
+# With remote API
 snag https://api.example.com
 
-# Con swagger.json (alias de openapi.json)
+# With swagger.json (alias for openapi.json)
 snag http://localhost:8000/swagger.json
 ```
 
-### Ejemplos con diferentes frameworks
+### Examples with different frameworks
 
 ```bash
 # FastAPI (Python)
@@ -125,60 +125,60 @@ snag https://api.stripe.com
 snag https://api.github.com
 ```
 
-## ⌨️ Atajos de Teclado
+## ⌨️ Keyboard Shortcuts
 
-### Modo Navegación
+### Navigation Mode
 
-- `j` / `↓` - Navegar hacia abajo
-- `k` / `↑` - Navegar hacia arriba
-- `enter` - Seleccionar endpoint
-- `e` - Editar parámetros/body con campos de entrada
-- `r` - Ejecutar request
-- `tab` - Cambiar panel enfocado
-- `q` - Salir
+- `j` / `↓` - Navigate down
+- `k` / `↑` - Navigate up
+- `enter` - Select endpoint
+- `e` - Edit parameters/body with input fields
+- `r` - Execute request
+- `tab` - Switch focused panel
+- `q` - Quit
 
-### Modo Edición de Parámetros
+### Parameter Edit Mode
 
-- `tab` / `↓` - Siguiente campo
-- `shift+tab` / `↑` - Campo anterior
-- `ctrl+s` - Guardar y volver
-- `esc` - Cancelar y volver
+- `tab` / `↓` - Next field
+- `shift+tab` / `↑` - Previous field
+- `ctrl+s` - Save and go back
+- `esc` - Cancel and go back
 
-### Modo Visualización de Respuesta
+### Response View Mode
 
-- `j/k` - Scroll línea a línea
+- `j/k` - Scroll line by line
 - `d` - Page down
 - `u` - Page up
-- `g` - Ir al inicio
-- `G` - Ir al final
-- `r` - Re-ejecutar request
-- `esc` - Volver a navegación
+- `g` - Go to beginning
+- `G` - Go to end
+- `r` - Re-execute request
+- `esc` - Go back to navigation
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tech Stack
 
-- **Framework TUI**: [Bubble Tea](https://github.com/charmbracelet/bubbletea) - Arquitectura Elm para Go
-- **Estilos**: [Lip Gloss](https://github.com/charmbracelet/lipgloss) - Layouts, bordes y colores elegantes
-- **Componentes**: [Bubbles](https://github.com/charmbracelet/bubbles) - Listas, textareas y viewports
-- **HTTP Client**: Cliente HTTP estándar de Go
-- **JSON Parsing**: Encoding/json estándar
+- **TUI Framework**: [Bubble Tea](https://github.com/charmbracelet/bubbletea) - Elm architecture for Go
+- **Styles**: [Lip Gloss](https://github.com/charmbracelet/lipgloss) - Elegant layouts, borders and colors
+- **Components**: [Bubbles](https://github.com/charmbracelet/bubbles) - Lists, textareas and viewports
+- **HTTP Client**: Standard Go HTTP client
+- **JSON Parsing**: Standard encoding/json
 
-## 📁 Arquitectura
+## 📁 Architecture
 
 ```
 snag/
 ├── main.go      # Entry point, Bubble Tea loop (Init, Update, View)
-├── model.go     # Estructuras de datos (Model, Endpoint, OpenAPISpec, etc.)
-├── api.go       # Lógica de API (fetch OpenAPI, parse endpoints, execute requests)
-├── ui.go        # Estilos Lip Gloss y renderizado de paneles
-└── go.mod       # Dependencias
+├── model.go     # Data structures (Model, Endpoint, OpenAPISpec, etc.)
+├── api.go       # API logic (fetch OpenAPI, parse endpoints, execute requests)
+├── ui.go        # Lip Gloss styles and panel rendering
+└── go.mod       # Dependencies
 ```
 
-### Patrón Elm (Model-View-Update)
+### Elm Pattern (Model-View-Update)
 
-- **Model**: Estado completo de la aplicación
-- **Init**: Inicialización y carga del OpenAPI spec
-- **Update**: Manejo de eventos (teclado, mensajes asíncronos)
-- **View**: Renderizado de la UI con Lip Gloss
+- **Model**: Complete application state
+- **Init**: Initialization and OpenAPI spec loading
+- **Update**: Event handling (keyboard, async messages)
+- **View**: UI rendering with Lip Gloss
 
 ## 🎨 Tema de Colores (Dark Mode)
 
@@ -201,25 +201,25 @@ snag/
 
 ## 🔮 Roadmap
 
-- [ ] Syntax highlighting para JSON con Chroma
-- [ ] Guardado de historial de requests
-- [ ] Variables de entorno y templates
-- [ ] Autenticación (Bearer, API Key, OAuth)
-- [ ] Export de requests a curl/código
-- [ ] Múltiples entornos (dev, staging, prod)
-- [ ] Tests automáticos de endpoints
+- [ ] Syntax highlighting for JSON with Chroma
+- [ ] Request history saving
+- [ ] Environment variables and templates
+- [ ] Authentication (Bearer, API Key, OAuth)
+- [ ] Export requests to curl/code
+- [ ] Multiple environments (dev, staging, prod)
+- [ ] Automated endpoint testing
 
-## 📝 Ejemplo con FastAPI
+## 📝 Example with FastAPI
 
 ```python
 # app.py
 from fastapi import FastAPI
 
-app = FastAPI(title="Mi API", version="1.0.0")
+app = FastAPI(title="My API", version="1.0.0")
 
 @app.get("/users")
 def get_users():
-    return [{"id": 1, "name": "Juan"}]
+    return [{"id": 1, "name": "John"}]
 
 @app.post("/users")
 def create_user(user: dict):
@@ -227,21 +227,21 @@ def create_user(user: dict):
 ```
 
 ```bash
-# Ejecutar FastAPI
+# Run FastAPI
 uvicorn app:app --reload
 
-# En otra terminal, ejecutar SNAG
+# In another terminal, run SNAG
 snag http://localhost:8000
 ```
 
-## 🤝 Contribuciones
+## 🤝 Contributing
 
-Las contribuciones son bienvenidas. Por favor, abre un issue o PR.
+Contributions are welcome. Please open an issue or PR.
 
-## 📄 Licencia
+## 📄 License
 
 MIT
 
 ---
 
-Hecho con ❤️ usando [Bubble Tea](https://github.com/charmbracelet/bubbletea) y [Lip Gloss](https://github.com/charmbracelet/lipgloss)
+Made with ❤️ using [Bubble Tea](https://github.com/charmbracelet/bubbletea) and [Lip Gloss](https://github.com/charmbracelet/lipgloss)
