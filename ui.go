@@ -298,13 +298,22 @@ func (m Model) renderFooter(styles Styles) string {
 				styles.KeyStyle().Render("esc") + styles.DescStyle().Render(" clear filter"),
 				styles.KeyStyle().Render("r") + styles.DescStyle().Render(" run"),
 			}
-		} else {
+		} else if m.focusedPanel == 0 {
 			keys = []string{
 				styles.KeyStyle().Render("j/k") + styles.DescStyle().Render(" navigate"),
 				styles.KeyStyle().Render("/") + styles.DescStyle().Render(" search"),
+				styles.KeyStyle().Render("u") + styles.DescStyle().Render(" refresh"),
 				styles.KeyStyle().Render("tab") + styles.DescStyle().Render(" switch panel"),
 				styles.KeyStyle().Render("r") + styles.DescStyle().Render(" run"),
 				styles.KeyStyle().Render("e") + styles.DescStyle().Render(" edit"),
+				styles.KeyStyle().Render("q") + styles.DescStyle().Render(" quit"),
+			}
+		} else {
+			keys = []string{
+				styles.KeyStyle().Render("tab") + styles.DescStyle().Render(" switch panel"),
+				styles.KeyStyle().Render("r") + styles.DescStyle().Render(" run"),
+				styles.KeyStyle().Render("e") + styles.DescStyle().Render(" edit"),
+				styles.KeyStyle().Render("q") + styles.DescStyle().Render(" quit"),
 			}
 		}
 	case StateEditingParams:

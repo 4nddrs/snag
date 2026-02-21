@@ -1,14 +1,14 @@
-# Ejemplo de API FastAPI para probar SNAG
-# Instalación: pip install fastapi uvicorn
-# Ejecutar: uvicorn example_api:app --reload
+# Example FastAPI API for testing SNAG
+# Installation: pip install fastapi uvicorn
+# Run: uvicorn main:app --reload --port 8000
 
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 from typing import List, Optional
 
 app = FastAPI(
-    title="APIs de Ejemplo para SNAG",
-    description="Una API de prueba para demostrar las capacidades de SNAG",
+    title="Example APIs for SNAG",
+    description="A test API to demonstrate SNAG capabilities",
     version="1.0.0",
 )
 
@@ -84,33 +84,33 @@ class Tag(BaseModel):
 
 # Base de datos simulada
 users_db = [
-    {"id": 1, "name": "Juan Pérez", "email": "juan@example.com", "age": 30},
-    {"id": 2, "name": "María García", "email": "maria@example.com", "age": 25},
-    {"id": 3, "name": "Carlos López", "email": "carlos@example.com", "age": 35},
+    {"id": 1, "name": "Alice Johnson", "email": "alice@example.com", "age": 30},
+    {"id": 2, "name": "Bob Smith", "email": "bob@example.com", "age": 25},
+    {"id": 3, "name": "Carol White", "email": "carol@example.com", "age": 35},
 ]
 
 products_db = [
-    {"id": 1, "name": "Laptop", "price": 999.99, "description": "Laptop potente", "stock": 10},
-    {"id": 2, "name": "Mouse", "price": 29.99, "description": "Mouse inalámbrico", "stock": 50},
-    {"id": 3, "name": "Teclado", "price": 49.99, "description": "Teclado mecánico RGB", "stock": 30},
-    {"id": 4, "name": "Monitor", "price": 349.99, "description": "Monitor 4K 27 pulgadas", "stock": 8},
+    {"id": 1, "name": "Laptop", "price": 999.99, "description": "Powerful laptop", "stock": 10},
+    {"id": 2, "name": "Mouse", "price": 29.99, "description": "Wireless mouse", "stock": 50},
+    {"id": 3, "name": "Keyboard", "price": 49.99, "description": "RGB mechanical keyboard", "stock": 30},
+    {"id": 4, "name": "Monitor", "price": 349.99, "description": "27-inch 4K monitor", "stock": 8},
 ]
 
 orders_db = []
 
 categories_db = [
-    {"id": 1, "name": "Electrónica", "description": "Dispositivos electrónicos", "parent_id": None},
-    {"id": 2, "name": "Periféricos", "description": "Accesorios para PC", "parent_id": 1},
-    {"id": 3, "name": "Audio", "description": "Equipos de audio", "parent_id": 1},
+    {"id": 1, "name": "Electronics", "description": "Electronic devices", "parent_id": None},
+    {"id": 2, "name": "Peripherals", "description": "PC accessories", "parent_id": 1},
+    {"id": 3, "name": "Audio", "description": "Audio equipment", "parent_id": 1},
 ]
 
 reviews_db = [
-    {"id": 1, "user_id": 1, "product_id": 1, "rating": 5, "title": "Excelente laptop", "body": "Muy rápida y duradera."},
-    {"id": 2, "user_id": 2, "product_id": 2, "rating": 4, "title": "Buen mouse", "body": "Cómodo para largas sesiones."},
+    {"id": 1, "user_id": 1, "product_id": 1, "rating": 5, "title": "Excellent laptop", "body": "Very fast and durable."},
+    {"id": 2, "user_id": 2, "product_id": 2, "rating": 4, "title": "Good mouse", "body": "Comfortable for long sessions."},
 ]
 
 addresses_db = [
-    {"id": 1, "user_id": 1, "street": "Av. Reforma 123", "city": "CDMX", "state": "CDMX", "zip_code": "06600", "country": "MX", "is_default": True},
+    {"id": 1, "user_id": 1, "street": "123 Main St", "city": "New York", "state": "NY", "zip_code": "10001", "country": "US", "is_default": True},
 ]
 
 coupons_db = [
@@ -119,32 +119,32 @@ coupons_db = [
 ]
 
 tags_db = [
-    {"id": 1, "name": "nuevo", "color": "#3fb950"},
-    {"id": 2, "name": "oferta", "color": "#f85149"},
-    {"id": 3, "name": "destacado", "color": "#bc8cff"},
+    {"id": 1, "name": "new", "color": "#3fb950"},
+    {"id": 2, "name": "sale", "color": "#f85149"},
+    {"id": 3, "name": "featured", "color": "#bc8cff"},
 ]
 
-# ================== ENDPOINTS DE USUARIOS ==================
+# ================== USER ENDPOINTS ==================
 
 
-@app.get("/users", tags=["Users"], summary="Obtener todos los usuarios")
+@app.get("/users", tags=["Users"], summary="Get all users")
 def get_users() -> List[User]:
-    """Devuelve la lista completa de usuarios"""
+    """Returns the full list of users"""
     return users_db
 
 
-@app.get("/users/{user_id}", tags=["Users"], summary="Obtener usuario por ID")
+@app.get("/users/{user_id}", tags=["Users"], summary="Get user by ID")
 def get_user(user_id: int) -> User:
-    """Devuelve un usuario específico por su ID"""
+    """Returns a specific user by their ID"""
     for user in users_db:
         if user["id"] == user_id:
             return user
-    raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    raise HTTPException(status_code=404, detail="User not found")
 
 
-@app.post("/users", tags=["Users"], summary="Crear nuevo usuario")
+@app.post("/users", tags=["Users"], summary="Create new user")
 def create_user(user: User) -> User:
-    """Crea un nuevo usuario en el sistema"""
+    """Creates a new user in the system"""
     new_id = max([u["id"] for u in users_db]) + 1 if users_db else 1
     user_dict = user.dict()
     user_dict["id"] = new_id
@@ -152,49 +152,49 @@ def create_user(user: User) -> User:
     return user_dict
 
 
-@app.put("/users/{user_id}", tags=["Users"], summary="Actualizar usuario")
+@app.put("/users/{user_id}", tags=["Users"], summary="Update user")
 def update_user(user_id: int, user: User) -> User:
-    """Actualiza un usuario existente"""
+    """Updates an existing user"""
     for i, u in enumerate(users_db):
         if u["id"] == user_id:
             user_dict = user.dict()
             user_dict["id"] = user_id
             users_db[i] = user_dict
             return user_dict
-    raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    raise HTTPException(status_code=404, detail="User not found")
 
 
-@app.delete("/users/{user_id}", tags=["Users"], summary="Eliminar usuario")
+@app.delete("/users/{user_id}", tags=["Users"], summary="Delete user")
 def delete_user(user_id: int):
-    """Elimina un usuario del sistema"""
+    """Deletes a user from the system"""
     for i, u in enumerate(users_db):
         if u["id"] == user_id:
             users_db.pop(i)
-            return {"message": "Usuario eliminado exitosamente"}
-    raise HTTPException(status_code=404, detail="Usuario no encontrado")
+            return {"message": "User deleted successfully"}
+    raise HTTPException(status_code=404, detail="User not found")
 
 
-# ================== ENDPOINTS DE PRODUCTOS ==================
+# ================== PRODUCT ENDPOINTS ==================
 
 
-@app.get("/products", tags=["Products"], summary="Obtener todos los productos")
+@app.get("/products", tags=["Products"], summary="Get all products")
 def get_products() -> List[Product]:
-    """Devuelve la lista completa de productos"""
+    """Returns the full list of products"""
     return products_db
 
 
-@app.get("/products/{product_id}", tags=["Products"], summary="Obtener producto por ID")
+@app.get("/products/{product_id}", tags=["Products"], summary="Get product by ID")
 def get_product(product_id: int) -> Product:
-    """Devuelve un producto específico por su ID"""
+    """Returns a specific product by its ID"""
     for product in products_db:
         if product["id"] == product_id:
             return product
-    raise HTTPException(status_code=404, detail="Producto no encontrado")
+    raise HTTPException(status_code=404, detail="Product not found")
 
 
-@app.post("/products", tags=["Products"], summary="Crear nuevo producto")
+@app.post("/products", tags=["Products"], summary="Create new product")
 def create_product(product: Product) -> Product:
-    """Crea un nuevo producto en el inventario"""
+    """Creates a new product in the inventory"""
     new_id = max([p["id"] for p in products_db]) + 1 if products_db else 1
     product_dict = product.dict()
     product_dict["id"] = new_id
@@ -203,49 +203,49 @@ def create_product(product: Product) -> Product:
 
 
 @app.patch(
-    "/products/{product_id}/stock", tags=["Products"], summary="Actualizar stock"
+    "/products/{product_id}/stock", tags=["Products"], summary="Update stock"
 )
 def update_stock(product_id: int, quantity: int) -> Product:
-    """Actualiza el stock de un producto"""
+    """Updates the stock quantity of a product"""
     for i, p in enumerate(products_db):
         if p["id"] == product_id:
             products_db[i]["stock"] = quantity
             return products_db[i]
-    raise HTTPException(status_code=404, detail="Producto no encontrado")
+    raise HTTPException(status_code=404, detail="Product not found")
 
 
-# ================== ENDPOINTS DE ÓRDENES ==================
+# ================== ORDER ENDPOINTS ==================
 
 
-@app.get("/orders", tags=["Orders"], summary="Obtener todas las órdenes")
+@app.get("/orders", tags=["Orders"], summary="Get all orders")
 def get_orders() -> List[Order]:
-    """Devuelve la lista completa de órdenes"""
+    """Returns the full list of orders"""
     return orders_db
 
 
-@app.post("/orders", tags=["Orders"], summary="Crear nueva orden")
+@app.post("/orders", tags=["Orders"], summary="Create new order")
 def create_order(order: Order) -> Order:
-    """Crea una nueva orden de compra"""
-    # Verificar que el usuario existe
+    """Creates a new purchase order"""
+    # Verify the user exists
     user_exists = any(u["id"] == order.user_id for u in users_db)
     if not user_exists:
-        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        raise HTTPException(status_code=404, detail="User not found")
 
-    # Verificar que el producto existe y hay stock
+    # Verify the product exists and has stock
     product = next((p for p in products_db if p["id"] == order.product_id), None)
     if not product:
-        raise HTTPException(status_code=404, detail="Producto no encontrado")
+        raise HTTPException(status_code=404, detail="Product not found")
 
     if product["stock"] < order.quantity:
-        raise HTTPException(status_code=400, detail="Stock insuficiente")
+        raise HTTPException(status_code=400, detail="Insufficient stock")
 
-    # Crear orden
+    # Create order
     new_id = max([o["id"] for o in orders_db]) + 1 if orders_db else 1
     order_dict = order.dict()
     order_dict["id"] = new_id
     orders_db.append(order_dict)
 
-    # Actualizar stock
+    # Update stock
     for p in products_db:
         if p["id"] == order.product_id:
             p["stock"] -= order.quantity
@@ -254,12 +254,12 @@ def create_order(order: Order) -> Order:
     return order_dict
 
 
-# ================== ENDPOINT DE SALUD ==================
+# ================== HEALTH ENDPOINT ==================
 
 
 @app.get("/health", tags=["System"], summary="Health check")
 def health_check():
-    """Verifica que la API está funcionando correctamente"""
+    """Checks that the API is running correctly"""
     return {
         "status": "healthy",
         "version": "1.0.0",
@@ -269,27 +269,27 @@ def health_check():
     }
 
 
-# ================== ENDPOINTS DE CATEGORÍAS ==================
+# ================== CATEGORY ENDPOINTS ==================
 
 
-@app.get("/categories", tags=["Categories"], summary="Listar categorías")
+@app.get("/categories", tags=["Categories"], summary="List categories")
 def get_categories():
-    """Devuelve todas las categorías disponibles"""
+    """Returns all available categories"""
     return categories_db
 
 
-@app.get("/categories/{category_id}", tags=["Categories"], summary="Obtener categoría por ID")
+@app.get("/categories/{category_id}", tags=["Categories"], summary="Get category by ID")
 def get_category(category_id: int):
-    """Devuelve una categoría específica"""
+    """Returns a specific category"""
     for c in categories_db:
         if c["id"] == category_id:
             return c
-    raise HTTPException(status_code=404, detail="Categoría no encontrada")
+    raise HTTPException(status_code=404, detail="Category not found")
 
 
-@app.post("/categories", tags=["Categories"], summary="Crear categoría")
+@app.post("/categories", tags=["Categories"], summary="Create category")
 def create_category(category: Category):
-    """Crea una nueva categoría"""
+    """Creates a new category"""
     new_id = max([c["id"] for c in categories_db]) + 1 if categories_db else 1
     d = category.dict()
     d["id"] = new_id
@@ -297,34 +297,34 @@ def create_category(category: Category):
     return d
 
 
-@app.put("/categories/{category_id}", tags=["Categories"], summary="Actualizar categoría")
+@app.put("/categories/{category_id}", tags=["Categories"], summary="Update category")
 def update_category(category_id: int, category: Category):
-    """Actualiza una categoría existente"""
+    """Updates an existing category"""
     for i, c in enumerate(categories_db):
         if c["id"] == category_id:
             d = category.dict()
             d["id"] = category_id
             categories_db[i] = d
             return d
-    raise HTTPException(status_code=404, detail="Categoría no encontrada")
+    raise HTTPException(status_code=404, detail="Category not found")
 
 
-@app.delete("/categories/{category_id}", tags=["Categories"], summary="Eliminar categoría")
+@app.delete("/categories/{category_id}", tags=["Categories"], summary="Delete category")
 def delete_category(category_id: int):
-    """Elimina una categoría"""
+    """Deletes a category"""
     for i, c in enumerate(categories_db):
         if c["id"] == category_id:
             categories_db.pop(i)
-            return {"message": "Categoría eliminada"}
-    raise HTTPException(status_code=404, detail="Categoría no encontrada")
+            return {"message": "Category deleted"}
+    raise HTTPException(status_code=404, detail="Category not found")
 
 
-# ================== ENDPOINTS DE REVIEWS ==================
+# ================== REVIEW ENDPOINTS ==================
 
 
-@app.get("/reviews", tags=["Reviews"], summary="Listar todas las reviews")
+@app.get("/reviews", tags=["Reviews"], summary="List all reviews")
 def get_reviews(product_id: Optional[int] = Query(None), user_id: Optional[int] = Query(None)):
-    """Devuelve reviews, con filtros opcionales por producto o usuario"""
+    """Returns reviews with optional filters by product or user"""
     result = reviews_db
     if product_id is not None:
         result = [r for r in result if r["product_id"] == product_id]
@@ -333,24 +333,24 @@ def get_reviews(product_id: Optional[int] = Query(None), user_id: Optional[int] 
     return result
 
 
-@app.get("/reviews/{review_id}", tags=["Reviews"], summary="Obtener review por ID")
+@app.get("/reviews/{review_id}", tags=["Reviews"], summary="Get review by ID")
 def get_review(review_id: int):
-    """Devuelve una review específica"""
+    """Returns a specific review"""
     for r in reviews_db:
         if r["id"] == review_id:
             return r
-    raise HTTPException(status_code=404, detail="Review no encontrada")
+    raise HTTPException(status_code=404, detail="Review not found")
 
 
-@app.post("/reviews", tags=["Reviews"], summary="Crear review")
+@app.post("/reviews", tags=["Reviews"], summary="Create review")
 def create_review(review: Review):
-    """Crea una nueva review para un producto"""
+    """Creates a new review for a product"""
     if not any(u["id"] == review.user_id for u in users_db):
-        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        raise HTTPException(status_code=404, detail="User not found")
     if not any(p["id"] == review.product_id for p in products_db):
-        raise HTTPException(status_code=404, detail="Producto no encontrado")
+        raise HTTPException(status_code=404, detail="Product not found")
     if not (1 <= review.rating <= 5):
-        raise HTTPException(status_code=400, detail="Rating debe estar entre 1 y 5")
+        raise HTTPException(status_code=400, detail="Rating must be between 1 and 5")
     new_id = max([r["id"] for r in reviews_db]) + 1 if reviews_db else 1
     d = review.dict()
     d["id"] = new_id
@@ -358,44 +358,44 @@ def create_review(review: Review):
     return d
 
 
-@app.put("/reviews/{review_id}", tags=["Reviews"], summary="Editar review")
+@app.put("/reviews/{review_id}", tags=["Reviews"], summary="Update review")
 def update_review(review_id: int, review: Review):
-    """Actualiza una review existente"""
+    """Updates an existing review"""
     for i, r in enumerate(reviews_db):
         if r["id"] == review_id:
             d = review.dict()
             d["id"] = review_id
             reviews_db[i] = d
             return d
-    raise HTTPException(status_code=404, detail="Review no encontrada")
+    raise HTTPException(status_code=404, detail="Review not found")
 
 
-@app.delete("/reviews/{review_id}", tags=["Reviews"], summary="Eliminar review")
+@app.delete("/reviews/{review_id}", tags=["Reviews"], summary="Delete review")
 def delete_review(review_id: int):
-    """Elimina una review"""
+    """Deletes a review"""
     for i, r in enumerate(reviews_db):
         if r["id"] == review_id:
             reviews_db.pop(i)
-            return {"message": "Review eliminada"}
-    raise HTTPException(status_code=404, detail="Review no encontrada")
+            return {"message": "Review deleted"}
+    raise HTTPException(status_code=404, detail="Review not found")
 
 
-# ================== ENDPOINTS DE DIRECCIONES ==================
+# ================== ADDRESS ENDPOINTS ==================
 
 
-@app.get("/users/{user_id}/addresses", tags=["Addresses"], summary="Direcciones de un usuario")
+@app.get("/users/{user_id}/addresses", tags=["Addresses"], summary="Get addresses for a user")
 def get_addresses(user_id: int):
-    """Devuelve todas las direcciones de un usuario"""
+    """Returns all addresses for a user"""
     if not any(u["id"] == user_id for u in users_db):
-        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        raise HTTPException(status_code=404, detail="User not found")
     return [a for a in addresses_db if a["user_id"] == user_id]
 
 
-@app.post("/users/{user_id}/addresses", tags=["Addresses"], summary="Agregar dirección")
+@app.post("/users/{user_id}/addresses", tags=["Addresses"], summary="Add address")
 def create_address(user_id: int, address: Address):
-    """Agrega una nueva dirección a un usuario"""
+    """Adds a new address to a user"""
     if not any(u["id"] == user_id for u in users_db):
-        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        raise HTTPException(status_code=404, detail="User not found")
     new_id = max([a["id"] for a in addresses_db]) + 1 if addresses_db else 1
     d = address.dict()
     d["id"] = new_id
@@ -404,9 +404,9 @@ def create_address(user_id: int, address: Address):
     return d
 
 
-@app.put("/users/{user_id}/addresses/{address_id}", tags=["Addresses"], summary="Actualizar dirección")
+@app.put("/users/{user_id}/addresses/{address_id}", tags=["Addresses"], summary="Update address")
 def update_address(user_id: int, address_id: int, address: Address):
-    """Actualiza una dirección existente"""
+    """Updates an existing address"""
     for i, a in enumerate(addresses_db):
         if a["id"] == address_id and a["user_id"] == user_id:
             d = address.dict()
@@ -414,44 +414,44 @@ def update_address(user_id: int, address_id: int, address: Address):
             d["user_id"] = user_id
             addresses_db[i] = d
             return d
-    raise HTTPException(status_code=404, detail="Dirección no encontrada")
+    raise HTTPException(status_code=404, detail="Address not found")
 
 
-@app.delete("/users/{user_id}/addresses/{address_id}", tags=["Addresses"], summary="Eliminar dirección")
+@app.delete("/users/{user_id}/addresses/{address_id}", tags=["Addresses"], summary="Delete address")
 def delete_address(user_id: int, address_id: int):
-    """Elimina una dirección de un usuario"""
+    """Deletes an address from a user"""
     for i, a in enumerate(addresses_db):
         if a["id"] == address_id and a["user_id"] == user_id:
             addresses_db.pop(i)
-            return {"message": "Dirección eliminada"}
-    raise HTTPException(status_code=404, detail="Dirección no encontrada")
+            return {"message": "Address deleted"}
+    raise HTTPException(status_code=404, detail="Address not found")
 
 
-# ================== ENDPOINTS DE CUPONES ==================
+# ================== COUPON ENDPOINTS ==================
 
 
-@app.get("/coupons", tags=["Coupons"], summary="Listar cupones")
+@app.get("/coupons", tags=["Coupons"], summary="List coupons")
 def get_coupons(active_only: bool = Query(False)):
-    """Devuelve todos los cupones. Filtra por activos con ?active_only=true"""
+    """Returns all coupons. Filter by active ones with ?active_only=true"""
     if active_only:
         return [c for c in coupons_db if c["active"]]
     return coupons_db
 
 
-@app.get("/coupons/{code}", tags=["Coupons"], summary="Validar cupón por código")
+@app.get("/coupons/{code}", tags=["Coupons"], summary="Validate coupon by code")
 def get_coupon(code: str):
-    """Valida y devuelve un cupón por su código"""
+    """Validates and returns a coupon by its code"""
     for c in coupons_db:
         if c["code"].upper() == code.upper():
             return c
-    raise HTTPException(status_code=404, detail="Cupón no encontrado")
+    raise HTTPException(status_code=404, detail="Coupon not found")
 
 
-@app.post("/coupons", tags=["Coupons"], summary="Crear cupón")
+@app.post("/coupons", tags=["Coupons"], summary="Create coupon")
 def create_coupon(coupon: Coupon):
-    """Crea un nuevo cupón de descuento"""
+    """Creates a new discount coupon"""
     if any(c["code"].upper() == coupon.code.upper() for c in coupons_db):
-        raise HTTPException(status_code=400, detail="Ya existe un cupón con ese código")
+        raise HTTPException(status_code=400, detail="A coupon with that code already exists")
     new_id = max([c["id"] for c in coupons_db]) + 1 if coupons_db else 1
     d = coupon.dict()
     d["id"] = new_id
@@ -459,38 +459,38 @@ def create_coupon(coupon: Coupon):
     return d
 
 
-@app.patch("/coupons/{coupon_id}/deactivate", tags=["Coupons"], summary="Desactivar cupón")
+@app.patch("/coupons/{coupon_id}/deactivate", tags=["Coupons"], summary="Deactivate coupon")
 def deactivate_coupon(coupon_id: int):
-    """Desactiva un cupón existente"""
+    """Deactivates an existing coupon"""
     for c in coupons_db:
         if c["id"] == coupon_id:
             c["active"] = False
             return c
-    raise HTTPException(status_code=404, detail="Cupón no encontrado")
+    raise HTTPException(status_code=404, detail="Coupon not found")
 
 
-@app.delete("/coupons/{coupon_id}", tags=["Coupons"], summary="Eliminar cupón")
+@app.delete("/coupons/{coupon_id}", tags=["Coupons"], summary="Delete coupon")
 def delete_coupon(coupon_id: int):
-    """Elimina un cupón"""
+    """Deletes a coupon"""
     for i, c in enumerate(coupons_db):
         if c["id"] == coupon_id:
             coupons_db.pop(i)
-            return {"message": "Cupón eliminado"}
-    raise HTTPException(status_code=404, detail="Cupón no encontrado")
+            return {"message": "Coupon deleted"}
+    raise HTTPException(status_code=404, detail="Coupon not found")
 
 
-# ================== ENDPOINTS DE TAGS ==================
+# ================== TAG ENDPOINTS ==================
 
 
-@app.get("/tags", tags=["Tags"], summary="Listar tags")
+@app.get("/tags", tags=["Tags"], summary="List tags")
 def get_tags():
-    """Devuelve todos los tags disponibles"""
+    """Returns all available tags"""
     return tags_db
 
 
-@app.post("/tags", tags=["Tags"], summary="Crear tag")
+@app.post("/tags", tags=["Tags"], summary="Create tag")
 def create_tag(tag: Tag):
-    """Crea un nuevo tag"""
+    """Creates a new tag"""
     new_id = max([t["id"] for t in tags_db]) + 1 if tags_db else 1
     d = tag.dict()
     d["id"] = new_id
@@ -498,37 +498,37 @@ def create_tag(tag: Tag):
     return d
 
 
-@app.put("/tags/{tag_id}", tags=["Tags"], summary="Actualizar tag")
+@app.put("/tags/{tag_id}", tags=["Tags"], summary="Update tag")
 def update_tag(tag_id: int, tag: Tag):
-    """Actualiza un tag existente"""
+    """Updates an existing tag"""
     for i, t in enumerate(tags_db):
         if t["id"] == tag_id:
             d = tag.dict()
             d["id"] = tag_id
             tags_db[i] = d
             return d
-    raise HTTPException(status_code=404, detail="Tag no encontrado")
+    raise HTTPException(status_code=404, detail="Tag not found")
 
 
-@app.delete("/tags/{tag_id}", tags=["Tags"], summary="Eliminar tag")
+@app.delete("/tags/{tag_id}", tags=["Tags"], summary="Delete tag")
 def delete_tag(tag_id: int):
-    """Elimina un tag"""
+    """Deletes a tag"""
     for i, t in enumerate(tags_db):
         if t["id"] == tag_id:
             tags_db.pop(i)
-            return {"message": "Tag eliminado"}
-    raise HTTPException(status_code=404, detail="Tag no encontrado")
+            return {"message": "Tag deleted"}
+    raise HTTPException(status_code=404, detail="Tag not found")
 
 
-# ================== ENDPOINTS DE AUTH ==================
+# ================== AUTH ENDPOINTS ==================
 
 
-@app.post("/auth/login", tags=["Auth"], summary="Iniciar sesión")
+@app.post("/auth/login", tags=["Auth"], summary="Login")
 def login(credentials: LoginRequest):
-    """Autentica un usuario y devuelve un token de sesión simulado"""
+    """Authenticates a user and returns a mock session token"""
     user = next((u for u in users_db if u["email"] == credentials.email), None)
     if not user:
-        raise HTTPException(status_code=401, detail="Credenciales inválidas")
+        raise HTTPException(status_code=401, detail="Invalid credentials")
     return {
         "token": f"mock-token-{user['id']}-abc123",
         "user_id": user["id"],
@@ -537,24 +537,24 @@ def login(credentials: LoginRequest):
     }
 
 
-@app.post("/auth/logout", tags=["Auth"], summary="Cerrar sesión")
+@app.post("/auth/logout", tags=["Auth"], summary="Logout")
 def logout():
-    """Invalida el token de sesión actual"""
-    return {"message": "Sesión cerrada exitosamente"}
+    """Invalidates the current session token"""
+    return {"message": "Logged out successfully"}
 
 
-@app.get("/auth/me", tags=["Auth"], summary="Perfil del usuario autenticado")
+@app.get("/auth/me", tags=["Auth"], summary="Authenticated user profile")
 def me():
-    """Devuelve el perfil del usuario autenticado (simulado: siempre user 1)"""
+    """Returns the authenticated user profile (mock: always returns user 1)"""
     return users_db[0]
 
 
-# ================== ENDPOINTS DE STATS (System) ==================
+# ================== STATS ENDPOINTS (System) ==================
 
 
-@app.get("/stats", tags=["System"], summary="Estadísticas generales")
+@app.get("/stats", tags=["System"], summary="General statistics")
 def get_stats():
-    """Devuelve estadísticas globales del sistema"""
+    """Returns global system statistics"""
     total_stock = sum(p["stock"] for p in products_db)
     avg_price = sum(p["price"] for p in products_db) / len(products_db) if products_db else 0
     return {
@@ -569,12 +569,12 @@ def get_stats():
     }
 
 
-@app.delete("/stats/reset", tags=["System"], summary="Resetear datos de prueba")
+@app.delete("/stats/reset", tags=["System"], summary="Reset test data")
 def reset_data():
-    """Limpia órdenes y reviews para reiniciar las pruebas"""
+    """Clears orders and reviews to restart testing"""
     orders_db.clear()
     reviews_db.clear()
-    return {"message": "Datos reseteados", "orders": 0, "reviews": 0}
+    return {"message": "Data reset", "orders": 0, "reviews": 0}
 
 
 if __name__ == "__main__":

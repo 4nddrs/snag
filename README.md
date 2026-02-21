@@ -1,20 +1,56 @@
+<div align="center">
+
 # ⚡ SNAG
 
-**S**wagger **N**avigator **A**nd **G**enerator - Una herramienta TUI elegante para explorar y probar APIs documentadas con OpenAPI/Swagger.
+**S**wagger **N**avigator **A**nd **G**enerator
 
-## 🎨 Características
+*Cliente TUI moderno para explorar y probar APIs REST documentadas con OpenAPI 3.x / Swagger*
 
-- **Interfaz elegante tipo LazyVim**: Dark mode con acentos azul navy
-- **Navegación Vim-style**: `j/k` para moverse, `enter` para seleccionar, `esc` para volver
-- **3 Paneles interactivos**:
-  - 📋 **Navegación**: Lista de endpoints con scroll fluido, agrupados por tags con colores por método HTTP
-  - ✏️ **Editor**: Sistema de campos de entrada para parámetros (no más edición manual de JSON!)
-  - 📡 **Respuesta**: Muestra el resultado con syntax highlighting y status code
-- **Feedback visual**: Bordes que cambian de color según el estado (cargando, éxito, error)
-- **Consumo automático de OpenAPI**: Solo proporciona la URL y SNAG hace el resto
-- **Interface en inglés**: CLI completamente en inglés para mayor accesibilidad
+<br>
+
+<table>
+  <tr>
+    <td><img src="images/image2.jpg" alt="SNAG Interface" width="400"/></td>
+    <td><img src="images/image3.jpg" alt="SNAG Navigation" width="400"/></td>
+  </tr>
+  <tr>
+    <td><img src="images/image4.jpg" alt="SNAG Editor" width="400"/></td>
+    <td><img src="images/image5.jpg" alt="SNAG Response" width="400"/></td>
+  </tr>
+</table>
+
+<br>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go)](https://go.dev/)
+[![Built with Bubble Tea](https://img.shields.io/badge/Built%20with-Bubble%20Tea-FF69B4)](https://github.com/charmbracelet/bubbletea)
+
+</div>
+
+---
+
+## 🌟 ¿Qué es SNAG?
+
+SNAG es un cliente de API interactivo que se ejecuta en tu terminal. Piensa en él como Postman, pero más rápido, minimalista y con atajos de teclado estilo Vim. Consume automáticamente la especificación OpenAPI de cualquier API y te permite navegar, editar parámetros y ejecutar requests sin salir de tu terminal.
+
+### Características Principales
+
+- **🎯 Consumo automático de OpenAPI 3.x**: Solo proporciona la URL y SNAG descubre todos los endpoints
+- **⌨️ Navegación Vim-style**: `j/k` para moverse, `enter` para seleccionar, `esc` para volver
+- **🎨 Interfaz elegante tipo LazyVim**: Dark mode profesional con sintaxis highlighting
+- **📋 3 Paneles interactivos en tiempo real**:
+  - **Navegación**: Lista de endpoints con scroll fluido, agrupados por tags con colores por método HTTP
+  - **Editor**: Sistema de campos de entrada para parámetros y request body (sin edición manual de JSON!)
+  - **Respuesta**: Resultado con syntax highlighting, status code y tiempo de respuesta
+- **🔍 Búsqueda/filtrado en tiempo real**: Tecla `/` para buscar endpoints por método, path o descripción
+- **📊 Grupos colapsables**: Organiza endpoints por tags (Users, Products, Orders, etc.)
+- **⚡ Rápido y ligero**: Sin dependencias pesadas, escrito en Go con Bubble Tea
+- **📋 Copiar respuestas**: Tecla `y` para copiar el JSON al portapapeles
+- **🌐 Compatible con cualquier framework**: FastAPI, Express, Spring Boot, Django, Laravel, ASP.NET Core, etc.
 
 ## 🚀 Instalación
+
+### Opción 1: Compilar desde código fuente
 
 ```bash
 # Clonar el repositorio
@@ -25,17 +61,68 @@ cd snag
 go mod tidy
 
 # Compilar
+go build -o snag
+
+# (Windows)
 go build -o snag.exe
 ```
 
-## 📖 Uso
+### Opción 2: Instalar binario (próximamente)
 
 ```bash
-# Ejecutar con la URL de tu API FastAPI
+# Linux/macOS con Homebrew
+brew install snag
+
+# Go install
+go install github.com/tu-usuario/snag@latest
+```
+
+## 📖 Uso Básico
+
+```bash
+# Con cualquier API que exponga OpenAPI 3.x
 snag http://localhost:8000
 
-# O con la ruta completa al openapi.json
+# Con la ruta completa al openapi.json
 snag http://localhost:8000/openapi.json
+
+# Con API remota
+snag https://api.example.com
+
+# Con swagger.json (alias de openapi.json)
+snag http://localhost:8000/swagger.json
+```
+
+### Ejemplos con diferentes frameworks
+
+```bash
+# FastAPI (Python)
+snag http://localhost:8000
+
+# Express.js con swagger-jsdoc (Node.js)
+snag http://localhost:3000
+
+# NestJS con @nestjs/swagger (Node.js)
+snag http://localhost:3000
+
+# Spring Boot con springdoc-openapi (Java)
+snag http://localhost:8080
+
+# Django con drf-spectacular (Python)
+snag http://localhost:8000
+
+# Laravel con l5-swagger (PHP)
+snag http://localhost:8000
+
+# ASP.NET Core con Swashbuckle (.NET)
+snag http://localhost:5000
+
+# Go con swaggo/swag
+snag http://localhost:8080
+
+# APIs públicas
+snag https://api.stripe.com
+snag https://api.github.com
 ```
 
 ## ⌨️ Atajos de Teclado

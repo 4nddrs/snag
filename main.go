@@ -373,6 +373,15 @@ func (m Model) handleNavigatingKeys(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 			return m, nil
 		}
 
+	case "u":
+		// Refresh the endpoint list by re-fetching the OpenAPI spec
+		if m.focusedPanel == 0 {
+			m.loading = true
+			m.searchQuery = ""
+			m.searchInput.SetValue("")
+			return m, fetchOpenAPICmd(m.apiURL)
+		}
+
 	case "tab":
 		// Change focused panel
 		m.focusedPanel = (m.focusedPanel + 1) % 3
