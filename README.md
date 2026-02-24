@@ -50,31 +50,10 @@ SNAG is an interactive API client that runs in your terminal. Think of it as Pos
 
 ## 🚀 Installation
 
-### Option 1: Build from source
+### Via brew
 
 ```bash
-# Clone the repository
-git clone <repo-url>
-cd snag
-
-# Install dependencies
-go mod tidy
-
-# Build
-go build -o snag
-
-# (Windows)
-go build -o snag.exe
-```
-
-### Option 2: Install binary (coming soon)
-
-```bash
-# Linux/macOS with Homebrew
-brew install snag
-
-# Go install
-go install github.com/your-user/snag@latest
+brew install 4nddrs/tap/snag
 ```
 
 ## 📖 Basic Usage
