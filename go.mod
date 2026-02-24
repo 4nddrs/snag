@@ -1,4 +1,4 @@
-module snag
+module github.com/4nddrs/snag
 
 go 1.25.0
 
